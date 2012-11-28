@@ -12,6 +12,7 @@
 {
     BOOL _isExecuting;
     BOOL _isFinished;
+    BOOL _isCanceled;
 }
 
 - (BOOL)isConcurrent
@@ -36,6 +37,11 @@
         _name = aName;
     }
     return self;
+}
+
+- (void)cancel
+{
+    _isCanceled = YES;
 }
 
 //- (void)start
@@ -68,7 +74,8 @@
 - (void)main
 {
     NSLog(@"%@ main", _name);
-    if (self.isCancelled) {
+    
+    if ([self isCancelled]) {
         NSLog(@"%@ isCancelled", _name);
         [self finishOperation];
         return;

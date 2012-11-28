@@ -44,10 +44,16 @@
 
     {
         ReadOperation *operation = [[ReadOperation alloc] initWithName:@"OP1"];
+        operation.completionBlock = ^{
+            NSLog(@"%@ completed", operation.name);
+        };
         [self.queue addOperation:operation];
     }
     {
         ReadOperation *operation = [[ReadOperation alloc] initWithName:@"OP2"];
+        operation.completionBlock = ^{
+            NSLog(@"%@ completed", operation.name);
+        };
         [self.queue addOperation:operation];
         [operation cancel];
     }
