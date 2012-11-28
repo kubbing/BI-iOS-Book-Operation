@@ -19,4 +19,14 @@
     return self;
 }
 
+//- (void)start
+//{
+//    [self performSelectorInBackground:@selector(main) withObject:nil];
+//}
+
+- (void)main
+{
+    NSLog(@"%@ main", _name);
+}
+
 @end
