@@ -17,6 +17,8 @@
 		1755DC5F16666C3400D638A4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1755DC5E16666C3400D638A4 /* Default@2x.png */; };
 		1755DC6116666C3400D638A4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1755DC6016666C3400D638A4 /* Default-568h@2x.png */; };
 		1755DC7016667D4700D638A4 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1755DC6F16667D4700D638A4 /* Storyboard.storyboard */; };
+		1755DC7316667E0B00D638A4 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1755DC7216667E0A00D638A4 /* AddressBook.framework */; };
+		1755DC7616667E2900D638A4 /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1755DC7516667E2900D638A4 /* BookViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,9 @@
 		1755DC5E16666C3400D638A4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		1755DC6016666C3400D638A4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1755DC6F16667D4700D638A4 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		1755DC7216667E0A00D638A4 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		1755DC7416667E2900D638A4 /* BookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookViewController.h; sourceTree = "<group>"; };
+		1755DC7516667E2900D638A4 /* BookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1755DC7316667E0B00D638A4 /* AddressBook.framework in Frameworks */,
 				1755DC4B16666C3400D638A4 /* UIKit.framework in Frameworks */,
 				1755DC4D16666C3400D638A4 /* Foundation.framework in Frameworks */,
 				1755DC4F16666C3400D638A4 /* CoreGraphics.framework in Frameworks */,
@@ -70,6 +76,7 @@
 		1755DC4916666C3400D638A4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1755DC7216667E0A00D638A4 /* AddressBook.framework */,
 				1755DC4A16666C3400D638A4 /* UIKit.framework */,
 				1755DC4C16666C3400D638A4 /* Foundation.framework */,
 				1755DC4E16666C3400D638A4 /* CoreGraphics.framework */,
@@ -82,6 +89,8 @@
 			children = (
 				1755DC5916666C3400D638A4 /* AppDelegate.h */,
 				1755DC5A16666C3400D638A4 /* AppDelegate.m */,
+				1755DC7416667E2900D638A4 /* BookViewController.h */,
+				1755DC7516667E2900D638A4 /* BookViewController.m */,
 				1755DC5116666C3400D638A4 /* Supporting Files */,
 			);
 			path = "Book-Operation";
@@ -170,6 +179,7 @@
 			files = (
 				1755DC5716666C3400D638A4 /* main.m in Sources */,
 				1755DC5B16666C3400D638A4 /* AppDelegate.m in Sources */,
+				1755DC7616667E2900D638A4 /* BookViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
