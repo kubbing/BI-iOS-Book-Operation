@@ -8,6 +8,7 @@
 
 #import "ReadOperation.h"
 #import <AddressBook/AddressBook.h>
+#import "Person.h"
 
 @implementation ReadOperation
 {
@@ -85,6 +86,11 @@
     [self endOperation];
 }
 
+- (void)addPerson:(Person *)aPerson
+{
+    [_people addObject:aPerson];
+}
+
 - (void)getABInfo
 {
     CFErrorRef errorRef;
@@ -104,7 +110,16 @@
     
     CFArrayRef peopleRef = ABAddressBookCopyArrayOfAllPeople(abRef);
     for (CFIndex i = 0; i < CFArrayGetCount(peopleRef); i++) {
-        ;
+        ABRecordRef recordRef = CFArrayGetValueAtIndex(peopleRef, i);
+        
+        NSString *first = (__bridge NSString *)ABRecordCopyValue(recordRef, kABPersonFirstNameProperty);
+        NSString *last = (__bridge NSString *)ABRecordCopyValue(recordRef, kABPersonLastNameProperty);
+        
+        Person *person = [[Person alloc] init];
+        person.firstName = first;
+        person.lastName = last;
+        
+        [self addPerson:person];
     }
     
     
