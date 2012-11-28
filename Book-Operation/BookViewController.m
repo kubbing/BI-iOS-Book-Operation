@@ -83,6 +83,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Actions
+
+- (void)addPerson:(Person *)aPerson
+{
+
+}
+
 #pragma mark - Obersver
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -92,7 +99,12 @@
 {
     if ([object isKindOfClass:[ReadOperation class]] &&
         [keyPath isEqualToString:@"people"]) {
-        NSLog(@"%@", change);
+        [self.people removeAllObjects];
+        [self.people addObjectsFromArray:change[@"new"]];
+        
+        
+        Person *person = nil;
+        [self performSelectorOnMainThread:@selector(addPerson:) withObject:person waitUntilDone:NO];
     }
 }
 
@@ -100,16 +112,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return _people.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -117,7 +127,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    cell.textLabel.text = [self.people[indexPath.row] description];
     
     return cell;
 }

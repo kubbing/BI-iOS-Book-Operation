@@ -88,9 +88,21 @@
 
 - (void)addPerson:(Person *)aPerson
 {
-    [self willChangeValueForKey:@"people"];
-    [_people addObject:aPerson];
-    [self didChangeValueForKey:@"people"];
+//    [self willChangeValueForKey:@"people"];
+    
+    NSUInteger index = self.people.count;
+    
+    [self willChange:NSKeyValueChangeInsertion
+     valuesAtIndexes:[NSIndexSet indexSetWithIndex:index]
+              forKey:@"people"];
+    
+    [self.people addObject:aPerson];
+    
+    [self didChange:NSKeyValueChangeInsertion
+    valuesAtIndexes:[NSIndexSet indexSetWithIndex:index]
+             forKey:@"people"];
+    
+//    [self didChangeValueForKey:@"people"];
 }
 
 - (void)getABInfo
@@ -120,6 +132,8 @@
         Person *person = [[Person alloc] init];
         person.firstName = first;
         person.lastName = last;
+        
+        system("sleep 2");
         
         [self addPerson:person];
     }
