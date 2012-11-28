@@ -87,7 +87,24 @@
 
 - (void)getABInfo
 {
+    CFErrorRef errorRef;
+    ABAddressBookRef abRef = ABAddressBookCreateWithOptions(NULL, &errorRef);
     
+    __block BOOL accessGranted;
+    ABAddressBookRequestAccessWithCompletion(abRef, ^(bool granted, CFErrorRef error) {
+        accessGranted = granted;
+        if (error) {
+            NSLog(@"%@", (__bridge NSString *)error);
+        }
+    });
+    
+    if (!accessGranted) {
+        return;
+    }
+    
+    
+    
+    CFRelease(abRef);
 }
 
 @end
