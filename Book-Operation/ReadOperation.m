@@ -7,6 +7,7 @@
 //
 
 #import "ReadOperation.h"
+#import <AddressBook/AddressBook.h>
 
 @implementation ReadOperation
 {
@@ -82,6 +83,11 @@
     [self getABInfo];
     
     [self endOperation];
+}
+
+- (void)getABInfo
+{
+    
 }
 
 @end
