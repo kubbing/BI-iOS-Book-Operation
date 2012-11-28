@@ -11,6 +11,7 @@
 @interface ReadOperation : NSOperation
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSMutableArray *people;
 
 - (id)initWithName:(NSString *)aName;
 

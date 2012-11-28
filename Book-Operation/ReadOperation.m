@@ -10,85 +10,78 @@
 
 @implementation ReadOperation
 {
+    BOOL _isConcurrent;
     BOOL _isExecuting;
     BOOL _isFinished;
-    BOOL _isCanceled;
+}
+
+
+- (id)initWithName:(NSString *)aName
+{
+    NSLog(@"%@: init", aName);
+    self = [super init];
+    if (self) {
+        _isConcurrent = YES;
+        _isExecuting = NO;
+        _isFinished = NO;
+        
+        _name = aName;
+        _people = [NSMutableArray array];
+    }
+    
+    return self;
 }
 
 - (BOOL)isConcurrent
 {
-    return YES;
-}
-
-- (BOOL)isExecuting
-{
-    return _isExecuting;
+    NSLog(@"%@: isConcurrent", _name);
+    return _isConcurrent;
 }
 
 - (BOOL)isFinished
 {
+    NSLog(@"%@: isFinished %d", _name, _isFinished);
     return _isFinished;
 }
 
-- (id)initWithName:(NSString *)aName
+- (void)start
 {
-    self = [super init];
-    if (self) {
-        _name = aName;
-    }
-    return self;
+    NSLog(@"%@: start", _name);
+    [self performSelectorInBackground:@selector(main) withObject:nil];
 }
 
-- (void)cancel
+- (void)beginOperation
 {
-    _isCanceled = YES;
-}
-
-//- (void)start
-//{
-//    [self performSelectorInBackground:@selector(main) withObject:nil];
-//}
-
-- (void)startOperation
-{
-    NSLog(@"%@ startOperation", _name);
-    
     [self willChangeValueForKey:@"isExecuting"];
     _isExecuting = YES;
     [self didChangeValueForKey:@"isExecuting"];
 }
 
-- (void)finishOperation
+- (void)endOperation
 {
-    NSLog(@"%@ finishOperation", _name);
-    
+    NSLog(@"%@: finish", _name);
     [self willChangeValueForKey:@"isExecuting"];
-    _isExecuting = NO;
-    [self didChangeValueForKey:@"isExecuting"];
-    
     [self willChangeValueForKey:@"isFinished"];
+    _isExecuting = NO;
     _isFinished = YES;
+    [self didChangeValueForKey:@"isExecuting"];
     [self didChangeValueForKey:@"isFinished"];
 }
 
 - (void)main
 {
-    NSLog(@"%@ main", _name);
-    
+    NSLog(@"%@: main", _name);
     if ([self isCancelled]) {
-        NSLog(@"%@ isCancelled", _name);
-        [self finishOperation];
+        NSLog(@"%@: canceled", _name);
+        [self endOperation];
         return;
     }
     
-    [self startOperation];
+    [self beginOperation];
     
-    /*
-     
-     */
-    system("sleep 2");
+    [self getABInfo];
     
-    [self finishOperation];   
+    [self endOperation];
 }
 
 @end
