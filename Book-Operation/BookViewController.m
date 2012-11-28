@@ -23,7 +23,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _queue = [[NSOperationQueue alloc] init];
-        _queue.maxConcurrentOperationCount = 1;
+        _queue.maxConcurrentOperationCount = 2;
     });
     
     return _queue;
@@ -42,8 +42,24 @@
 {
     [super viewDidLoad];
 
-    ReadOperation *operation = [[ReadOperation alloc] initWithName:@"OP1"];
-    [self.queue addOperation:operation];
+    {
+        ReadOperation *operation = [[ReadOperation alloc] initWithName:@"OP1"];
+        [self.queue addOperation:operation];
+    }
+    {
+        ReadOperation *operation = [[ReadOperation alloc] initWithName:@"OP2"];
+        [self.queue addOperation:operation];
+        [operation cancel];
+    }
+    {
+        ReadOperation *operation = [[ReadOperation alloc] initWithName:@"OP3"];
+        [self.queue addOperation:operation];
+    }
+    {
+        ReadOperation *operation = [[ReadOperation alloc] initWithName:@"OP4"];
+        [self.queue addOperation:operation];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
