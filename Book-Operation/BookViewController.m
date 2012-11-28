@@ -87,7 +87,12 @@
 
 - (void)addPerson:(Person *)aPerson
 {
-
+    [self.people addObject:aPerson];
+    
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.people.count-1 inSection:0]]
+                          withRowAnimation:UITableViewRowAnimationRight];
+    [self.tableView endUpdates];
 }
 
 #pragma mark - Obersver
@@ -99,11 +104,7 @@
 {
     if ([object isKindOfClass:[ReadOperation class]] &&
         [keyPath isEqualToString:@"people"]) {
-        [self.people removeAllObjects];
-        [self.people addObjectsFromArray:change[@"new"]];
-        
-        
-        Person *person = nil;
+        Person *person = change[@"new"][0];
         [self performSelectorOnMainThread:@selector(addPerson:) withObject:person waitUntilDone:NO];
     }
 }

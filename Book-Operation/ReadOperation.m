@@ -133,7 +133,7 @@
         person.firstName = first;
         person.lastName = last;
         
-        system("sleep 2");
+        system("sleep 5");
         
         [self addPerson:person];
     }
