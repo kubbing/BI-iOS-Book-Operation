@@ -102,8 +102,13 @@
         return;
     }
     
+    CFArrayRef peopleRef = ABAddressBookCopyArrayOfAllPeople(abRef);
+    for (CFIndex i = 0; i < CFArrayGetCount(peopleRef); i++) {
+        ;
+    }
     
     
+    CFRelease(peopleRef);
     CFRelease(abRef);
 }
 
