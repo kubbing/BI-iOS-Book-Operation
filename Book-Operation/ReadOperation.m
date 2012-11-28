@@ -10,6 +10,13 @@
 
 @implementation ReadOperation
 
-
+- (id)initWithName:(NSString *)aName
+{
+    self = [super init];
+    if (self) {
+        _name = aName;
+    }
+    return self;
+}
 
 @end

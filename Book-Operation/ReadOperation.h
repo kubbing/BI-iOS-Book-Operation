@@ -10,4 +10,8 @@
 
 @interface ReadOperation : NSOperation
 
+@property (nonatomic, strong) NSString *name;
+
+- (id)initWithName:(NSString *)aName;
+
 @end

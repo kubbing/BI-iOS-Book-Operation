@@ -7,6 +7,8 @@
 //
 
 #import "BookViewController.h"
+#import "ReadOperation.h"
+#import "Person.h"
 
 @interface BookViewController ()
 
@@ -40,7 +42,8 @@
 {
     [super viewDidLoad];
 
-//    self.queue addOperation:<#(NSOperation *)#>
+    ReadOperation *operation = [[ReadOperation alloc] initWithName:@"OP1"];
+    [self.queue addOperation:operation];
 }
 
 - (void)didReceiveMemoryWarning
