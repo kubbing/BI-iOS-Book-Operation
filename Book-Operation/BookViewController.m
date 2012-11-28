@@ -13,6 +13,7 @@
 @interface BookViewController ()
 
 @property (nonatomic, strong) NSOperationQueue *queue;
+@property (nonatomic, strong) NSMutableArray *people;
 
 @end
 
@@ -27,6 +28,16 @@
     });
     
     return _queue;
+}
+
+- (NSMutableArray *)people
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _people = [NSMutableArray array];
+    });
+    
+    return _people;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -44,11 +55,18 @@
 
     {
         ReadOperation *operation = [[ReadOperation alloc] initWithName:@"OP1"];
+        [operation addObserver:self
+                    forKeyPath:@"people"
+                       options:NSKeyValueObservingOptionNew
+                       context:NULL];
         operation.completionBlock = ^{
             NSLog(@"%@ completed", operation.name);
         };
         [self.queue addOperation:operation];
     }
+    
+    
+    
     {
         ReadOperation *operation = [[ReadOperation alloc] initWithName:@"OP2"];
         operation.completionBlock = ^{
@@ -57,21 +75,25 @@
         [self.queue addOperation:operation];
         [operation cancel];
     }
-    {
-        ReadOperation *operation = [[ReadOperation alloc] initWithName:@"OP3"];
-        [self.queue addOperation:operation];
-    }
-    {
-        ReadOperation *operation = [[ReadOperation alloc] initWithName:@"OP4"];
-        [self.queue addOperation:operation];
-    }
-
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Obersver
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ([object isKindOfClass:[ReadOperation class]] &&
+        [keyPath isEqualToString:@"people"]) {
+        NSLog(@"%@", change);
+    }
 }
 
 #pragma mark - Table view data source

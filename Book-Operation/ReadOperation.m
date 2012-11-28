@@ -88,7 +88,9 @@
 
 - (void)addPerson:(Person *)aPerson
 {
+    [self willChangeValueForKey:@"people"];
     [_people addObject:aPerson];
+    [self didChangeValueForKey:@"people"];
 }
 
 - (void)getABInfo
@@ -121,7 +123,6 @@
         
         [self addPerson:person];
     }
-    
     
     CFRelease(peopleRef);
     CFRelease(abRef);
