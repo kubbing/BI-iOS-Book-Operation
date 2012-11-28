@@ -95,7 +95,7 @@
     [self.tableView endUpdates];
 }
 
-#pragma mark - Obersver
+#pragma mark - Observer
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
